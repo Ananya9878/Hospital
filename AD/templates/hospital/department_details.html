@@ -1,0 +1,193 @@
+{% extends "hospital/base.html" %}
+
+{% block title %}
+
+<title> Hospital </title>
+
+{% endblock %}
+{% block user %}
+{% if user|length > 0 %}
+
+
+<button class="btn btn-outline-success" type="button" >{{user}}
+</button>
+<a href="../../user/logout">
+<button class="btn btn-outline-danger" type="button" >LogOut
+</button>
+</a>
+{%else%}
+<a href="../../user/login">
+<button class="btn btn-outline-primary" type="button" >LogIn
+</button>
+</a>
+<!--<a class="d-block text-center mt-2 small" href="../../user/login">LogIn</a>-->
+
+
+{% endif %}
+{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<!--Carousel Start-->
+     <div class="container-sm offset-sm-2">
+
+<div class="row">
+    <div class="col-sm-8">
+
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    {% for i in hospital_image %}
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="{{ forloop.counter }}" class="active" aria-current="true" aria-label="Slide {{ forloop.counter|add:1 }}"></button>
+  {% endfor %}
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active img-fluid">
+      <img src="{{MEDIA_URL}}/{{department.picture}}" class="d-block w-100" alt="..." height="500px" >
+      <div class="carousel-caption d-none d-md-block">
+        <h5>First slide label</h5>
+        <p>Some representative placeholder content for the first slide.</p>
+      </div>
+    </div>
+    {% for i in department_image %}
+    <div class="carousel-item img-fluid">
+      <img src="{{MEDIA_URL}}/{{i.picture}}" class="d-block w-100" alt="..." height="500px">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Third slide label</h5>
+        <p>Some representative placeholder content for the third slide.</p>
+      </div>
+    </div>
+      {% endfor %}
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+        </div>
+         </div>
+</div>
+<!--Crousel end-->
+<!---->
+<!---->
+<!--    Hospital detail Card Start............-->
+    <br>
+    <br>
+
+    <div class="container offset-sm-1">
+    <div class="card">
+  <h5 class="card-header">Hospital Name: {{hospital.name}}</h5>
+  <div class="card-body">
+    <h5 class="card-title">Address: {{hospital.address}}</h5>
+    <p class="card-text">No of Doctors: {{hospital.no_of_doctors}}
+    <br>
+    No of beds: {{hospital.no_of_beds}}
+    <br>
+    Description: {{hospital.description}}</p>
+    <a href="#" class="btn btn-primary">Contact</a>
+  </div>
+</div>
+</div>
+    <br>
+    <br>
+<!-- Hospital Detail End...............-->
+<div class="container offset-sm-1">
+    <div class="card">
+  <h5 class="card-header">Department Name: {{department.name}}</h5>
+  <div class="card-body">
+<!--    <h5 class="card-title">Address: {{de.address}}</h5>-->
+    <p class="card-text">No of Doctors: {{doctor|length}}
+    <br>
+<!--    No of beds: {{hospital.no_of_beds}}-->
+<!--    <br>-->
+    Description: {{hospital.description}}</p>
+    <a href="#" class="btn btn-primary">Contact</a>
+  </div>
+</div>
+</div>
+
+<!--Doctor card slide start -->
+<br>
+<br>
+<div class="container offset-md-1">
+     <div class="alert alert-dark" role="alert">
+        <h3> <b> <i>Doctor</i> </b></h3>
+</div>
+</div>
+<!--Doctor card slide end   -->
+
+<!--Doctor card Start -->
+{% load static %}
+<!--<link rel="stylesheet" type="text/css" href="{% static 'hospital/css/doctor_profile.css' %}">-->
+
+<link href="{% static 'hospital/css/doctor_profile.css' %}" rel="stylesheet">
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4"><a href="#custom-modal" class="btn btn-custom waves-effect waves-light mb-4" data-animation="fadein" data-plugin="custommodal" data-overlayspeed="200" data-overlaycolor="#36404a"><i class="mdi mdi-plus"></i> Add Member</a></div>
+            <!-- end col -->
+        </div>
+        <!-- end row -->
+
+         <div class="row">
+             {% for i in doctor %}
+            <div class="col-lg-4">
+                <div class="text-center card-box">
+                    <div class="member-card pt-2 pb-2">
+                        <div class="thumb-lg member-thumb mx-auto"><img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="rounded-circle img-thumbnail" alt="profile-image"></div>
+                        <div class="">
+                            <h4>{{ i.name }}</h4>
+                            <p class="text-muted">@Founder <span>| </span><span><a href="#" class="text-pink">websitename.com</a></span></p>
+                        </div>
+                        <ul class="social-links list-inline">
+                            <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                            <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                            <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
+                        </ul>
+<!--                        <a class="btn btn-primary" href="/hospital/get/{{ i.id }}" role="button">Details</a>-->
+                        <button type="button" class="btn btn-primary mt-3 btn-rounded waves-effect w-md waves-light">Message Now</button>
+                        <a href="/doctor/get/{{ i.id }}"> <button type="button" class="btn btn-primary mt-3 btn-rounded waves-effect w-md waves-light" >Detail</button></a>
+
+                        <div class="mt-4">
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="mt-3">
+                                        <h4>2563</h4>
+                                        <p class="mb-0 text-muted">Wallets Balance</p>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="mt-3">
+                                        <h4>6952</h4>
+                                        <p class="mb-0 text-muted">Income amounts</p>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="mt-3">
+                                        <h4>1125</h4>
+                                        <p class="mb-0 text-muted">Total Transactions</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end col -->
+
+             {% endfor %}
+        </div>
+    </div>
+</div>
+
+            <!-- end col -->
+<!--  Doctor card ends    -->
+
+
+{% endblock %}

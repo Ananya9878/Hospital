@@ -1,0 +1,64 @@
+{% extends "hospital/base.html" %}
+
+{% block title %}
+
+<title> Home </title>
+
+{% endblock %}
+
+
+{% block user %}
+{% if user|length > 0 %}
+
+
+<button class="btn btn-outline-success" type="button" >{{user}}
+</button>
+<a href="../../user/logout">
+<button class="btn btn-outline-danger" type="button" >LogOut
+</button>
+</a>
+{%else%}
+<a href="../../user/login">
+<button class="btn btn-outline-primary" type="button" >LogIn
+</button>
+</a>
+<!--<a class="d-block text-center mt-2 small" href="../../user/login">LogIn</a>-->
+
+
+{% endif %}
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<!--{% get_media_prefix %}-->
+ <div class="container">
+        <div class="row row-cols-1 row-cols-md-4 g-4">
+{% for i in hospitals %}
+
+  <div class="col">
+
+    <div class="card h-100">
+
+
+      <img src="{{ MEDIA_URL }}/{{i.picture}}" class="card-img-top" alt="..." style="height:200px"/>
+                       <a href="../../../hospital/get/{{ i.id }}" class="btn btn-light stretched-link">
+
+      <div class="card-body">
+        <h5 class="card-title">{{i.name}}</h5>
+        <p class="card-text">Address: {{i.address}}</p>
+        <p class="card-text">No. of Doctors: {{i.no_of_doctors}}</p>
+        <p class="card-text">no_of_beds: {{i.no_of_beds}}</p>
+        <p class="card-text">Description: {{i.description}}</p>
+<!--       <a class="btn btn-primary" href="/hospital/get/{{ i.id }}" role="button">Details</a>-->
+      </div>
+                           </a>
+    </div>
+
+  </div>
+  {% endfor %}
+        </div>
+ </div>
+<br>
+
+
+{% endblock %}

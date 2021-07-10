@@ -1,0 +1,146 @@
+{% extends "hospital/base.html" %}
+
+{% block title %}
+
+
+<title> Home </title>
+
+{% endblock %}
+{% block user %}
+{% if user|length > 0 %}
+
+
+<button class="btn btn-outline-success" type="button" >{{user}}
+</button>
+<a href="../../user/logout">
+<button class="btn btn-outline-danger" type="button" >LogOut
+</button>
+</a>
+{%else%}
+<a href="../../user/login">
+<button class="btn btn-outline-primary" type="button" >LogIn
+</button>
+</a>
+<!--<a class="d-block text-center mt-2 small" href="../../user/login">LogIn</a>-->
+
+
+{% endif %}
+{% endblock %}
+
+{% block search %}
+      <form class="d-flex" method="GET" action="../../../../doctor/search">
+<select class="form-control me-2" name="state" id="inputState">
+                        <option value="SelectState">Select State</option>
+                        <option value="Andra Pradesh">Andra Pradesh</option>
+                        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                        <option value="Assam">Assam</option>
+                        <option value="Bihar">Bihar</option>
+                        <option value="Chhattisgarh">Chhattisgarh</option>
+                        <option value="Goa">Goa</option>
+                        <option value="Gujarat">Gujarat</option>
+                        <option value="Haryana">Haryana</option>
+                        <option value="Himachal Pradesh">Himachal Pradesh</option>
+                        <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                        <option value="Jharkhand">Jharkhand</option>
+                        <option value="Karnataka">Karnataka</option>
+                        <option value="Kerala">Kerala</option>
+                        <option value="Madya Pradesh">Madya Pradesh</option>
+                        <option value="Maharashtra">Maharashtra</option>
+                        <option value="Manipur">Manipur</option>
+                        <option value="Meghalaya">Meghalaya</option>
+                        <option value="Mizoram">Mizoram</option>
+                        <option value="Nagaland">Nagaland</option>
+                        <option value="Orissa">Orissa</option>
+                        <option value="Punjab">Punjab</option>
+                        <option value="Rajasthan">Rajasthan</option>
+                        <option value="Sikkim">Sikkim</option>
+                        <option value="Tamil Nadu">Tamil Nadu</option>
+                        <option value="Telangana">Telangana</option>
+                        <option value="Tripura">Tripura</option>
+                        <option value="Uttaranchal">Uttaranchal</option>
+                        <option value="Uttar Pradesh">Uttar Pradesh</option>
+                        <option value="West Bengal">West Bengal</option>
+                        <option disabled style="background-color:#aaa; color:#fff">UNION Territories</option>
+                        <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                        <option value="Chandigarh">Chandigarh</option>
+                        <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
+                        <option value="Daman and Diu">Daman and Diu</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Lakshadeep">Lakshadeep</option>
+                        <option value="Pondicherry">Pondicherry</option>
+                      </select>
+<!--  </div>-->
+<!--  <div class="form-group col-md-4">-->
+<!--    <label for="inputDistrict">District</label>-->
+    <select class="form-control me-2" name="district" id="inputDistrict">
+        <option value="">Select District</option>
+    </select>
+        <input class="form-control me-2" type="search" placeholder="Search" name="search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<!--<link rel="stylesheet" type="text/css" href="{% static 'hospital/css/doctor_profile.css' %}">-->
+
+<link href="{% static 'doctor/css/doctor_profile.css' %}" rel="stylesheet">
+<div class="content">
+    <div class="container">
+        <div class="row">
+<!--            <div class="col-sm-4"><a href="#custom-modal" class="btn btn-custom waves-effect waves-light mb-4" data-animation="fadein" data-plugin="custommodal" data-overlayspeed="200" data-overlaycolor="#36404a"><i class="mdi mdi-plus"></i> Add Member</a></div>-->
+            <!-- end col -->
+        </div>
+        <!-- end row -->
+
+         <div class="row">
+             {% for i in doctor %}
+            <div class="col-lg-4">
+                <div class="text-center card-box">
+                    <div class="member-card pt-2 pb-2">
+                        <div class="thumb-lg member-thumb mx-auto"><img src="{{ MEDIA_URL }}/{{i.picture}}" class="rounded-circle img-thumbnail" alt="profile-image"></div>
+                        <div class="">
+                            <h4>{{ i.name }}</h4>
+                            <p class="text-muted">@Founder <span>| </span><span><a href="#" class="text-pink">websitename.com</a></span></p>
+                        </div>
+                        <ul class="social-links list-inline">
+                            <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                            <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                            <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
+                        </ul>
+<!--                        <a class="btn btn-primary" href="/hospital/get/{{ i.id }}" role="button">Details</a>-->
+                        <button type="button" class="btn btn-primary mt-3 btn-rounded waves-effect w-md waves-light">Message Now</button>
+                        <a href="/doctor/get/{{ i.id }}"> <button type="button" class="btn btn-primary mt-3 btn-rounded waves-effect w-md waves-light" >Detail</button></a>
+                        <div class="mt-4">
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="mt-3">
+                                        <h4>2563</h4>
+                                        <p class="mb-0 text-muted">Wallets Balance</p>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="mt-3">
+                                        <h4>6952</h4>
+                                        <p class="mb-0 text-muted">Income amounts</p>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="mt-3">
+                                        <h4>1125</h4>
+                                        <p class="mb-0 text-muted">Total Transactions</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end col -->
+
+             {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

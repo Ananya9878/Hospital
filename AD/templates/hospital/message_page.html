@@ -1,0 +1,60 @@
+{% extends "hospital/base.html" %}
+{% block content %}
+{% load static %}
+<!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">-->
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="{% static 'hospital/js/message_page123.js' %}"></script>
+
+<link href="{% static 'hospital/css/message_page.css' %}" rel="stylesheet">
+<!--&lt;!&ndash;&#45;&#45;&#45;&#45; Include the above in your HEAD tag &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&ndash;&gt;-->
+
+<!--&lt;!&ndash;<!DOCTYPE html>&ndash;&gt;-->
+<!--&lt;!&ndash;<html>&ndash;&gt;-->
+<!--&lt;!&ndash;    <body>&ndash;&gt;-->
+
+<!--&lt;!&ndash;<br>&ndash;&gt;-->
+<!--&lt;!&ndash;<br>&ndash;&gt;-->
+
+
+<script>
+
+{% for i in all_message %}
+{% if i.isSenderUser %}
+insertChat("you","{{i.message}}","{{i.timestamp}}")
+{% else %}
+insertChat("me","{{i.message}}","{{i.timestamp}}")
+{% endif %}
+{% endfor %}
+</script>
+
+        <div class="col-sm-3 col-sm-offset-4 frame">
+            <ul id ="message_list"> </ul>
+            <div>
+                <div class="msj-rta macro">
+
+
+                    <div class="text text-r" style="background:whitesmoke !important">
+                        <form action="" method="post" id="form1">
+                        <input class="mytext" name="message" placeholder="Type a message"/>
+                            </form>
+                    </div>
+
+                </div>
+                <br>
+                <br>
+                <button type="submit" style="padding:10px;" form="form1" value="Submit">
+                <div style="padding:10px;">
+                    <span class="glyphicon glyphicon-share-alt"></span>
+                </div>
+                    </button>
+
+            </div>
+<br>
+            <br>
+        </div>
+<!--    </body>-->
+<!--</html>-->
+ {% endblock %}
